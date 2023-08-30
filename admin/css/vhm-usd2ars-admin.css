@@ -1,0 +1,37 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+ #vhm-usd2ars.wrap table td {
+    margin-bottom: 9px;
+    padding: 15px 10px !important;
+    line-height: 1.3;
+    vertical-align: middle;
+  }
+  #vhm-usd2ars.wrap fieldset legend {
+     padding: 0;
+     margin-bottom: 1em;
+  }
+  #vhm-usd2ars.wrap fieldset label {
+     min-width: 10em;
+     vertical-align: baseline;
+  }
+ #vhm-usd2ars.wrap fieldset input {
+     margin: 0 0 1em;
+ }
+ 
+ #vhm-usd2ars-dashboard-widget .vhm-usd2ars-info-box {
+    display: flex;
+ }
+ #vhm-usd2ars-dashboard-widget .vhm-usd2ars-content-info-box {
+    width: 50%;
+    border: 1px solid #dddddd;
+    padding: 10px;
+ }
+ #vhm-usd2ars-dashboard-widget .vhm-usd2ars-content-info-box:first-child {
+    border-right: none;
+ }
+ #vhm-usd2ars-dashboard-widget .vhm-usd2ars-content-info-box span {
+    font-size: 2em;
+ }

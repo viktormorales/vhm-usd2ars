@@ -20,7 +20,7 @@
 
 <form method="post" action="options.php">
 <?php settings_fields( $this->plugin_name ); ?>
-<textarea name="<?php echo $this->option_name?>_rate_exchange" style="display:none"><?php echo get_option($this->option_name . '_rate_exchange', true); ?></textarea>
+<textarea name="<?php echo $this->option_name?>_rates" style="display:none"><?php echo get_option($this->option_name . '_rates', true); ?></textarea>
 <?php do_settings_sections( $this->plugin_name ); ?>
 
 <h2 class="title"><?php _e('WooCommerce', $this->plugin_name); ?></h2>
@@ -35,17 +35,17 @@
         <tr>
             <th scope="row"><label for="<?php echo $this->option_name ?>_advice"><?php _e('Select rate exchange value', $this->plugin_name); ?></label></th>
             <td>
-                <select name="<?php echo $this->option_name; ?>_default">
+                <select name="<?php echo $this->option_name; ?>_selected_rate">
                     <option value=""><?php _e('Use base price', $this->plugin_name)?></option>
                     <?php
-                        $rate_exchange = json_decode(get_option($this->option_name . '_rate_exchange', 
+                        $rates = json_decode(get_option($this->option_name . '_rates', 
                         true), true);
 
-                        foreach ($rate_exchange['dollar'] as $key => $dollar) {
+                        foreach ($rates['dollar'] as $key => $dollar) {
                             ?>
                             <optgroup label="<?php echo $key?>">
-                                <option value="<?php echo $key . '_buy'; ?>" <?php selected( get_option($this->option_name . '_default'), $key . '_buy' ); ?>><?php echo __('Buy', $this->plugin_name) . ': ' . $dollar['buy']; ?></option>
-                                <option value="<?php echo $key . '_sell'; ?>" <?php selected( get_option($this->option_name . '_default'), $key . '_sell' ); ?>><?php echo __('Sell', $this->plugin_name) . ': ' . $dollar['sell']; ?></option>
+                                <option value="<?php echo $key . '_buy'; ?>" <?php selected( get_option($this->option_name . '_selected_rate'), $key . '_buy' ); ?>><?php echo __('Buy', $this->plugin_name) . ': ' . $dollar['buy']; ?></option>
+                                <option value="<?php echo $key . '_sell'; ?>" <?php selected( get_option($this->option_name . '_selected_rate'), $key . '_sell' ); ?>><?php echo __('Sell', $this->plugin_name) . ': ' . $dollar['sell']; ?></option>
                             </optgroup>
                             <?php
                         }
@@ -56,8 +56,18 @@
         <tr>
             <th scope="row"><label for="<?php echo $this->option_name ?>_advice"><?php _e('Select how you are displaying the price information', $this->plugin_name); ?></label></th>
             <td>
-                <input type="radio" value="value1" name="display"> I have prices in dollars and i want to show them in pesos.
-                <input type="radio" value="value2" name="display"> I have prices in pesos and I want to show a reference in dollars.
+                <?php 
+                    $display_price = get_option($this->option_name . '_display_price');
+                ?>
+                <p><label><input type="radio" value="usd" name="<?php echo $this->option_name; ?>_display_price" <?php checked( $display_price, "usd", true ); ?> checked> <?php _e("I have prices in dollars and I want to show them in pesos.", $this->plugin_name)?></label></p>
+                
+                <p><label><input type="radio" value="ars" name="<?php echo $this->option_name; ?>_display_price"<?php checked( $display_price, "ars", true ); ?>> <?php _e("I have prices in pesos and I want to show a reference in dollars.", $this->plugin_name)?></label></p>
+                
+                <?php 
+                    $usd_reference_text = get_option($this->option_name . '_usd_reference_text');
+                ?>
+                <p class="description"><?php _e('Reference in dollar text.', $this->plugin_name); ?></p>
+                <textarea name="<?php echo $this->option_name; ?>_usd_reference_text" class="large-text"><?php echo $usd_reference_text; ?></textarea>
             </td>
         </tr>
     </tbody>

@@ -137,9 +137,10 @@ class Vhm_Usd2ars_Admin {
 	 * @since  1.0.0
 	 */
 	public function register_settings() {
-		register_setting( $this->plugin_name, $this->option_name . '_rate_exchange' );
-		register_setting( $this->plugin_name, $this->option_name . '_default' );
-		register_setting( $this->plugin_name, $this->option_name . '_decimals' );
+		register_setting( $this->plugin_name, $this->option_name . '_rates' );
+		register_setting( $this->plugin_name, $this->option_name . '_selected_rate' );
+		register_setting( $this->plugin_name, $this->option_name . '_display_price' );
+		register_setting( $this->plugin_name, $this->option_name . '_usd_reference_text' );
 	}
 
 	/**
@@ -159,10 +160,10 @@ class Vhm_Usd2ars_Admin {
 				<?php echo date('d/m/Y H:i:s', get_option($this->option_name . '_last_updated')); ?></p>
 
 				<?php 
-					$rate_exchange = json_decode(get_option($this->option_name . '_rate_exchange', 
+					$rates = json_decode(get_option($this->option_name . '_rates', 
 					true), true);
 
-					foreach ($rate_exchange['dollar'] as $key => $dollar) {
+					foreach ($rates['dollar'] as $key => $dollar) {
 						?>
 						<h2><?php echo $key; ?></h2>
 						<div class="vhm-usd2ars-info-box">
@@ -207,7 +208,7 @@ class Vhm_Usd2ars_Admin {
 		$json = $req->get_body();
 
 		update_option($this->option_name . '_last_updated', current_time('timestamp'));
-		update_option($this->option_name . '_rate_exchange', $json);
+		update_option($this->option_name . '_rates', $json);
 		
 		return new WP_REST_Response(
 			[

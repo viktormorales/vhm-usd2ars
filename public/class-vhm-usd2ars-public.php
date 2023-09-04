@@ -118,14 +118,44 @@ class Vhm_Usd2ars_Public {
 		global $post, $woocommerce;
 		$multiply_by = 1;
 
-		$rate_exchange = json_decode(get_option($this->option_name . '_rate_exchange', true), true);
-		$rate_exchange_default = get_option($this->option_name . '_default', true);
+		$rates = json_decode(get_option($this->option_name . '_rates', true), true);
+		$selected_rate = get_option($this->option_name . '_selected_rate', true);
+
+		$display_price = get_option($this->option_name . '_display_price');
 		
-		if (isset($rate_exchange_default) && $rate_exchange_default != "") {
-			$rate_exchange_default = explode('_', get_option($this->option_name . '_default', true));
-			$multiply_by = $rate_exchange['dollar'][$rate_exchange_default[0]][$rate_exchange_default[1]];
+		if ($display_price !== "ars") {
+			if (isset($selected_rate) || $selected_rate !== '') {
+				$selected_rate = explode('_', get_option($this->option_name . '_selected_rate', true));
+				$multiply_by = $rates['dollar'][$selected_rate[0]][$selected_rate[1]];
+			}
 		}
 
 		return $price * $multiply_by;
 	}
+
+	/**
+	 * Add a USD rate conversion reference after the price shown in argentinian pesos
+	 */
+	function wc_usd_reference_after_price($price, $pid) {
+		$display_price = get_option($this->option_name . '_display_price');
+
+		if ($display_price == "ars") {
+
+			$rates = json_decode(get_option($this->option_name . '_rates', true), true);
+			$selected_rate = get_option($this->option_name . '_selected_rate', true);
+			
+			$selected_rate = explode('_', get_option($this->option_name . '_selected_rate', true));
+			$ars2usd = round($pid->get_price() / number_format((float)$rates['dollar'][$selected_rate[0]][$selected_rate[1]],2,",",""), 2);
+
+			$usd_reference_text = get_option($this->option_name . '_usd_reference_text');
+
+			$usd_reference = '<span class="woocommerce-Usd-reference usd-reference">';
+			$usd_reference .= $ars2usd . 'us$';
+			$usd_reference .= ($usd_reference_text) ? ' ' . $usd_reference_text : '';
+			$usd_reference .= '</span>';
+		}
+
+		return $price . $usd_reference;
+	}
+
 }

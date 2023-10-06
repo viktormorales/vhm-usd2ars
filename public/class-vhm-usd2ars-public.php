@@ -150,7 +150,7 @@ class Vhm_Usd2ars_Public {
 			$usd_reference_text = get_option($this->option_name . '_usd_reference_text');
 
 			$usd_reference = '<span class="woocommerce-Usd-reference usd-reference">';
-			$usd_reference .= $ars2usd . 'us$';
+			$usd_reference .= 'USD' . $ars2usd;
 			$usd_reference .= ($usd_reference_text) ? ' ' . $usd_reference_text : '';
 			$usd_reference .= '</span>';
 		}

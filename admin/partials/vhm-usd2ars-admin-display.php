@@ -58,10 +58,15 @@
             <td>
                 <?php 
                     $display_price = get_option($this->option_name . '_display_price');
+                    echo "<p> - " . $display_price . " - </p>";
                 ?>
-                <p><label><input type="radio" value="usd" name="<?php echo $this->option_name; ?>_display_price" <?php checked( $display_price, "usd", true ); ?> checked> <?php _e("I have prices in dollars and I want to show them in pesos.", $this->plugin_name)?></label></p>
-                
-                <p><label><input type="radio" value="ars" name="<?php echo $this->option_name; ?>_display_price"<?php checked( $display_price, "ars", true ); ?>> <?php _e("I have prices in pesos and I want to show a reference in dollars.", $this->plugin_name)?></label></p>
+                <p><label><input type="radio" value="" name="<?php echo $this->option_name; ?>_display_price" <?php checked( $display_price, "", true ); ?>> <?php _e("Do not convert prices.", $this->plugin_name)?></label></p>
+
+                <p><label><input type="radio" value="default_reference" name="<?php echo $this->option_name; ?>_display_price" <?php checked( $display_price, "default_reference", true ); ?>> <?php _e("Do not convert prices but show a reference in dollars.", $this->plugin_name)?></label></p>
+
+                <p><label><input type="radio" value="ars" name="<?php echo $this->option_name; ?>_display_price" <?php checked( $display_price, "ars", true ); ?>> <?php _e("Convert prices to argentinian pesos.", $this->plugin_name)?></label></p>
+
+                <p><label><input type="radio" value="ars_reference" name="<?php echo $this->option_name; ?>_display_price" <?php checked( $display_price, "ars_reference", true ); ?>> <?php _e("Convert prices to argentinian pesos and show a reference in dollars.", $this->plugin_name)?></label></p><br>
                 
                 <?php 
                     $usd_reference_text = get_option($this->option_name . '_usd_reference_text');

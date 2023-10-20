@@ -123,7 +123,7 @@ class Vhm_Usd2ars_Public {
 
 		$display_price = get_option($this->option_name . '_display_price');
 		
-		if ($display_price !== "ars") {
+		if ($display_price == "ars" || $display_price == "ars_reference") {
 			if (isset($selected_rate) || $selected_rate !== '') {
 				$selected_rate = explode('_', get_option($this->option_name . '_selected_rate', true));
 				$multiply_by = $rates['dollar'][$selected_rate[0]][$selected_rate[1]];
@@ -138,8 +138,9 @@ class Vhm_Usd2ars_Public {
 	 */
 	function wc_usd_reference_after_price($price, $pid) {
 		$display_price = get_option($this->option_name . '_display_price');
-
-		if ($display_price == "ars") {
+		$ars_reference_text = get_option($this->option_name . '_usd_reference_text');
+		
+		if ($display_price == "default_reference") {
 
 			$rates = json_decode(get_option($this->option_name . '_rates', true), true);
 			$selected_rate = get_option($this->option_name . '_selected_rate', true);
@@ -147,15 +148,46 @@ class Vhm_Usd2ars_Public {
 			$selected_rate = explode('_', get_option($this->option_name . '_selected_rate', true));
 			$ars2usd = round($pid->get_price() / number_format((float)$rates['dollar'][$selected_rate[0]][$selected_rate[1]],2,",",""), 2);
 
-			$usd_reference_text = get_option($this->option_name . '_usd_reference_text');
-
-			$usd_reference = '<span class="woocommerce-Usd-reference usd-reference">';
-			$usd_reference .= 'USD' . $ars2usd;
-			$usd_reference .= ($usd_reference_text) ? ' ' . $usd_reference_text : '';
-			$usd_reference .= '</span>';
+			$ars_reference = '<span class="woocommerce-Ars-reference ars-reference">';
+			$ars_reference .= 'USD' . $ars2usd;
+			$ars_reference .= '</span>';
+		}
+		elseif ($display_price == "ars_reference") {
+			$ars_reference = '<span class="woocommerce-Ars-reference ars-reference">';
+			$ars_reference .= 'USD' . number_format((float)$pid->get_price(),0,",",".");
+			$ars_reference .= '</span>';
 		}
 
-		return $price . $usd_reference;
+		if ($ars_reference_text) {
+			$ars_reference .= '<span class="woocommerce-Ars-reference-text ars-reference-text">';
+			$ars_reference .= $ars_reference_text;
+			$ars_reference .= '</span>';
+		}
+		/*
+		elseif ($display_price == "usd") {
+			$ars_reference = '<span class="woocommerce-Usd-reference usd-reference">';
+			$ars_reference .= 'USD' . number_format((float)$pid->get_price(),0,",",".");
+			$ars_reference .= ($usd_reference_text) ? ' ' . $usd_reference_text : '';
+			$ars_reference .= '</span>';
+		}
+		else {
+
+			$rates = json_decode(get_option($this->option_name . '_rates', true), true);
+			$selected_rate = get_option($this->option_name . '_selected_rate', true);
+			
+			$selected_rate = explode('_', get_option($this->option_name . '_selected_rate', true));
+			$ars2usd = round($pid->get_price() / number_format((float)$rates['dollar'][$selected_rate[0]][$selected_rate[1]],2,",",""), 2);
+
+			
+
+			$ars_reference = '<span class="woocommerce-Usd-reference usd-reference">';
+			$ars_reference .= 'USD' . $ars2usd;
+			$ars_reference .= ($usd_reference_text) ? ' ' . $usd_reference_text : '';
+			$ars_reference .= '</span>';
+		}
+		*/
+		return $price . $ars_reference;
+		
 	}
 
 }

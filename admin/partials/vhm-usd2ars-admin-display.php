@@ -58,7 +58,6 @@
             <td>
                 <?php 
                     $display_price = get_option($this->option_name . '_display_price');
-                    echo "<p> - " . $display_price . " - </p>";
                 ?>
                 <p><label><input type="radio" value="" name="<?php echo $this->option_name; ?>_display_price" <?php checked( $display_price, "", true ); ?>> <?php _e("Do not convert prices.", $this->plugin_name)?></label></p>
 

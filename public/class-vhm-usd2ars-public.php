@@ -190,4 +190,14 @@ class Vhm_Usd2ars_Public {
 		
 	}
 
+	function wc_currency_symbol( $currency_symbol, $currency ) {
+		
+		switch( $currency ) {
+			 case 'USD': 
+				$currency_symbol = 'USD'; 
+			 	break;
+		}
+		
+		return $currency_symbol;
+	}
 }

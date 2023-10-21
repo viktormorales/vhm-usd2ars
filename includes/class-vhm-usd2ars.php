@@ -183,6 +183,9 @@ class Vhm_Usd2ars {
 		$this->loader->add_filter( 'raw_woocommerce_price', $plugin_public, 'wc_product_get_price' );
 
 		$this->loader->add_filter( 'woocommerce_get_price_suffix', $plugin_public, 'wc_usd_reference_after_price', 10, 2 );
+
+		$this->loader->add_filter('woocommerce_currency_symbol', $plugin_public, 'wc_currency_symbol', 10, 2);
+
 	}
 
 	/**

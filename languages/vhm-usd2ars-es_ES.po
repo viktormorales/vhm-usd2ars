@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: VHM USD2ARS\n"
-"POT-Creation-Date: 2023-09-04 19:31-0300\n"
-"PO-Revision-Date: 2023-09-04 19:33-0300\n"
+"POT-Creation-Date: 2023-10-20 20:29-0300\n"
+"PO-Revision-Date: 2023-10-20 20:30-0300\n"
 "Last-Translator: Viktor H. Morales <viktorhugomorales@gmail.com>\n"
 "Language-Team: Victor H. Morales <https://viktormorales.com>\n"
 "Language: es_ES\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_n;_x;_ex;_en;esc_attr__;esc_attr_e;esc_attr_x;"
 "esc_html__;esc_html_e;esc_html_x;_n_noop_;_nx_noop_;"
@@ -66,34 +66,46 @@ msgstr "Usar precio base"
 msgid "Select how you are displaying the price information"
 msgstr "Elegir como mostrar el precio"
 
-#: admin/partials/vhm-usd2ars-admin-display.php:62
-msgid "I have prices in dollars and I want to show them in pesos."
-msgstr "Tengo precios en dólares y quiero convertirlos a pesos."
+#: admin/partials/vhm-usd2ars-admin-display.php:63
+msgid "Do not convert prices."
+msgstr "No convertir los precios."
 
-#: admin/partials/vhm-usd2ars-admin-display.php:64
-msgid "I have prices in pesos and I want to show a reference in dollars."
-msgstr "Tengo precios en pesos y quiero mostrar una referencia en dólares."
+#: admin/partials/vhm-usd2ars-admin-display.php:65
+msgid "Do not convert prices but show a reference in dollars."
+msgstr "No convertir los precios pero mostrar la referencia en dólares."
+
+#: admin/partials/vhm-usd2ars-admin-display.php:67
+msgid "Convert prices to argentinian pesos."
+msgstr "Convertir los precios a pesos argentinos."
 
 #: admin/partials/vhm-usd2ars-admin-display.php:69
-msgid "Reference in dollar text."
-msgstr "Texto de referencia en dólares"
+msgid "Convert prices to argentinian pesos and show a reference in dollars."
+msgstr ""
+"Convertir los precios a pesos argentinos y mostrar la referencia en dólares."
 
-#: admin/partials/vhm-usd2ars-admin-display.php:76
+#: admin/partials/vhm-usd2ars-admin-display.php:74
+msgid "Reference in dollar text."
+msgstr "Texto de referencia en dólares."
+
+#: admin/partials/vhm-usd2ars-admin-display.php:81
 msgid "Help"
 msgstr "Ayuda"
 
-#: admin/partials/vhm-usd2ars-admin-display.php:80
+#: admin/partials/vhm-usd2ars-admin-display.php:85
 msgid "Author"
 msgstr "Autor"
 
-#: admin/partials/vhm-usd2ars-admin-display.php:84
+#: admin/partials/vhm-usd2ars-admin-display.php:89
 #, php-format
 msgid "Developed and maintained by %s."
 msgstr "Desarrollado y mantenido por %s."
 
-#: admin/partials/vhm-usd2ars-admin-display.php:88
+#: admin/partials/vhm-usd2ars-admin-display.php:93
 msgid "Use the official contact information on the author website."
 msgstr "Use la información de contacto en la web oficial del autor."
+
+#~ msgid "I have prices in dollars and I want to show them in pesos."
+#~ msgstr "Tengo precios en dólares y quiero convertirlos a pesos."
 
 #~ msgid "VHM Exchange Rate"
 #~ msgstr "VHM Cotización"
@@ -202,9 +214,6 @@ msgstr "Use la información de contacto en la web oficial del autor."
 
 #~ msgid "Total over regular price"
 #~ msgstr "Total sobre precio normal"
-
-#~ msgid "Total over sale price"
-#~ msgstr "Total sobre precio rebajado"
 
 #~ msgid "Aerobox tax (Regular Price)"
 #~ msgstr "Impuesto Aerobox (Precio normal)"
